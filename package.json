@@ -1,0 +1,27 @@
+{
+  "name": "cnvs",
+  "version": "0.0.0",
+  "description": "Small, lightweight canvas library",
+  "main": "cnvs.js",
+  "dependencies": {
+    "minivents": "~1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allouis/cnvs.git"
+  },
+  "keywords": [
+    "canvas",
+    "cnvs"
+  ],
+  "author": "Fabien O'Carroll",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allouis/cnvs/issues"
+  },
+  "homepage": "https://github.com/allouis/cnvs"
+}
