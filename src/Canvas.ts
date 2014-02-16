@@ -1,80 +1,84 @@
-import Vector2D = require('./Vector2D')
-
-export interface Object2D {
-	position: Vector2D.Vector2D
-	render (ctx: any): void 
-}
+/// <reference path="Vector2D.ts" />
+/// <reference path="Shape.ts" />
 
 module cnvs {
-	export class Canvas {
 
-		public element
-		public context
-		private children
+  export class Canvas {
 
-		constructor() {
-			this.element = document.createElement('canvas')
-			this.context = this.element.getContext('2d')
-			this.children = []
-		}
+    public element
+    public context
+    private children
 
-		public clear (x: number, y: number, width: number, height: number) {
-        this.context.clearRect(
-            (x || 0),
-            (y || 0),
-            (width || this.element.clientWidth),
-            (height || this.element.clientHeight)
-        );
+    constructor() {
+      this.element = document.createElement('canvas');
+      this.context = this.element.getContext('2d');
+      this.children = [];
+      this.setupEvents();
+    }
+
+    private setupEvents() {
+      window.addEventListener('click', function(event) {
+        var x = event.clientX;
+        var y = event.clientY;
+      });
+    }
+
+    public clear (x: number, y: number, width: number, height: number) {
+      this.context.clearRect(
+          (x || 0),
+          (y || 0),
+          (width || this.element.clientWidth),
+          (height || this.element.clientHeight)
+          );
     }
 
     public save () {
-        this.context.save();
+      this.context.save();
     }
 
     public restore () {
-        this.context.restore();
+      this.context.restore();
     }
 
     public scale (width: number, height: number) {
-        this.context.scale(width, (height || width) ); 
+      this.context.scale(width, (height || width) ); 
     }
 
     public rotate (angle: number) {
-        this.context.rotate(angle*Math.PI/180);
+      this.context.rotate(angle*Math.PI/180);
     }
 
     public translate (x: number, y: number) {
-        this.context.translate(x, (y || 0) );
+      this.context.translate(x, (y || 0) );
     }
 
     private mathAxis () {
-        this.translate(0, this.element.clientHeight);
-        this.scale(1, -1);
+      this.translate(0, this.element.clientHeight);
+      this.scale(1, -1);
     }
 
     public add (obj: Object2D) {
-        this.children.push(obj);
+      this.children.push(obj);
     }
 
     public remove (obj: Object2D) {
-        this.children.splice(this.children.indexOf(obj), 1); 
+      this.children.splice(this.children.indexOf(obj), 1); 
     }
 
     public empty () {
-        this.children.length = 0;
+      this.children.length = 0;
     }
 
     public render (){
-        var ctx = this.context;
-        this.children.forEach(function(obj){
-            !!obj.active && obj.render(ctx); 
-        });
+      var ctx = this.context;
+      this.children.forEach(function(obj){
+        !!obj.active && obj.render(ctx); 
+      });
     }
 
     public animate () {
-    	requestAnimFrame(this.animate.bind(this))
-    	this.render()
+      requestAnimFrame(this.animate.bind(this));
+      this.render();
     }
-
-	}
+  }
 }
