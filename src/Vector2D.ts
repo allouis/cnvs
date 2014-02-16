@@ -1,49 +1,45 @@
+module cnvs {
+  export interface Vector {
+      x: number
+      y: number
+  }
 
-export module cnvs {
+  export class Vector2D implements Vector {
 
-    export interface Vector {
-        x: number
-        y: number
-    }
+      x: number
+      y: number
 
-    export class Vector2D implements Vector {
+      constructor (x: number, y: number) {
+          this.x = x || 0
+          this.y = y || 0
+      }
 
-        x: number
-        y: number
+      public clone () {
+          return new Vector2D(this.x, this.y)
+      }
 
-        constructor (x: number, y: number) {
-            this.x = x || 0
-            this.y = y || 0
-        }
+      public add (vector: Vector) {
+          this.x += vector.x
+          this.y += vector.y
+          return this
+      }
 
-        public clone () {
-            return new Vector2D(this.x, this.y)
-        }
+      public scale (scalar: number) {
+          this.x *= scalar
+          this.y *= scalar
+          return this
+      }
 
-        public add (vector: Vector) {
-            this.x += vector.x
-            this.y += vector.y
-            return this
-        }
+      public dot (vector: Vector) {
+          return this.x * vector.x + this.y * vector.y
+      }
 
-        public scale (scalar: number) {
-            this.x *= scalar
-            this.y *= scalar
-            return this
-        }
+      public length () {
+          return Math.sqrt(this.dot(this))
+      }
 
-        public dot (vector: Vector) {
-            return this.x * vector.x + this.y * vector.y
-        }
-
-        public length () {
-            return Math.sqrt(this.dot(this))
-        }
-
-        public angle (vector: Vector2D) {
-            return Math.acos(this.dot(vector)/this.length()*vector.length())
-        }
-    }
-
+      public angle (vector: Vector2D) {
+          return Math.acos(this.dot(vector)/this.length()*vector.length())
+      }
+  }
 }
-
