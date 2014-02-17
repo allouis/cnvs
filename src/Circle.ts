@@ -1,4 +1,5 @@
 import Arc = require('./Arc');
+import CircleOptions = require('./CircleOptions');
 
 class Circle extends Arc {
   

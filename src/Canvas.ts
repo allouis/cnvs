@@ -1,5 +1,5 @@
-import Shape = require('./Shape');
 import Vector2D = require('./Vector2D');
+import Object2D = require('./Object2D');
 
 class Canvas {
 
@@ -55,11 +55,11 @@ class Canvas {
     this.scale(1, -1);
   }
 
-  public add (obj: Shape.Object2D) {
+  public add (obj: Object2D) {
     this.children.push(obj);
   }
 
-  public remove (obj: Shape.Object2D) {
+  public remove (obj: Object2D) {
     this.children.splice(this.children.indexOf(obj), 1); 
   }
 

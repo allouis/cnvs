@@ -5,13 +5,13 @@ import minivents = require('minivents');
 
 class Shape implements Object2D {
 
-  public position: Vector2D.Vector2D
+  public position: Vector2D
   public fill: string
   public stroke: string
   public border: number
 
   constructor (options: ShapeOptions) {
-    this.position = new Vector2D.Vector2D(options.x, options.y);
+    this.position = new Vector2D(options.x, options.y);
     this.fill = options.fill || 'black';
     this.stroke = options.stroke || 'black';
     this.border = options.border || 1;
