@@ -1,31 +1,24 @@
-/// <reference path="Vector2D.ts" />
-/// <reference path="Shape.ts" />
+import Shape = require('./Shape');
+import RectOptions = require('./RectOptions');
 
-module cnvs {
+class Rect extends Shape {
+  
+  width: number
+  height: number
 
-  export interface RectOptions extends ShapeOptions {
-    width: number
-    height: number
+  constructor (options: RectOptions) {
+    super(options) 
+      this.width = options.width
+      this.height = options.height
   }
 
-  export class Rect extends Shape {
-    
-    width: number
-    height: number
-
-    constructor (options: RectOptions) {
-      super(options) 
-        this.width = options.width
-        this.height = options.height
-    }
-
-    render (ctx: any) {
-      super.render(ctx)
-      ctx.rect(this.position.x, this.position.y, this.width, this.height);
-      ctx.fill();
-      ctx.stroke();
-    }
-
+  render (ctx: any) {
+    super.render(ctx)
+    ctx.rect(this.position.x, this.position.y, this.width, this.height);
+    ctx.fill();
+    ctx.stroke();
   }
 
 }
+
+export = Rect
