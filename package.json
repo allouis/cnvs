@@ -4,12 +4,13 @@
   "description": "Small, lightweight canvas library",
   "main": "cnvs.js",
   "dependencies": {
-    "minivents": "~1.1.1"
+    "minivents": "~1.1.1",
+    "typeify": "~0.1.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --module commonjs --outDir ./build src/cnvs.ts"
+    "build": "tsc --module commonjs --outDir ./build src/cnvs.ts && browserify -r ./build/cnvs.js:cnvs -o cnvs.js"
   },
   "repository": {
     "type": "git",
