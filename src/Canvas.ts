@@ -18,17 +18,20 @@ class Canvas {
   }
 
   private setupEvents() {
-    window.addEventListener('click', function(event) {
-      var offset = this.getOffset();
-      var x = event.clientX - offset.x;
-      var y = event.clientY - offset.y;
-      var hitPoint = new Vector2D(x, y);
-      for (var i = this.children.length; i;) {
-        var child = this.children[--i]; 
-        if (child.containsPoint(hitPoint)) {
-          child.emit('click', event);
+    var events = 'click mousedown mousemove mouseup'.split(' ');
+    events.forEach(function(eventName) {
+      this.element.addEventListener('click', function(event) {
+        var offset = this.getOffset();
+        var x = event.clientX - offset.x;
+        var y = event.clientY - offset.y;
+        var hitPoint = new Vector2D(x, y);
+        for (var i = this.children.length; i;) {
+          var child = this.children[--i];
+          if (child.containsPoint(hitPoint)) {
+            child.emit(eventName, event);
+          }
         }
-      } 
+      }.bind(this));
     }.bind(this));
   }
 
