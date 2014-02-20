@@ -19,12 +19,35 @@ class Canvas {
 
   private setupEvents() {
     window.addEventListener('click', function(event) {
-      var x = event.clientX;
-      var y = event.clientY;
-    });
+      var offset = this.getOffset();
+      var x = offset.x - event.clientX
+      var y = offset.y - event.clientY;
+      var hitPoint = new Vector2D(x, y);
+      for (var i = this.children.length; i;) {
+        var child = this.children[--i]; 
+        if (child.containsPoint(hitPoint)) {
+          child.emit('click', event);
+        }
+      } 
+    }.bind(this));
   }
 
-  public clear (x: number, y: number, width: number, height: number) {
+  private getOffset() {
+    var x = 0,
+        y = 0,
+        elem = this.element;
+    do {
+      x += elem.offsetLeft
+      y += elem.offsetTop
+    } while (elem = elem.offsetParent);
+
+    return {
+      x: x,
+      y: y
+    }
+  }
+
+  public clear (x?: number, y?: number, width?: number, height?: number) {
     this.context.clearRect(
         (x || 0),
         (y || 0),
@@ -78,7 +101,8 @@ class Canvas {
   }
 
   public animate () {
-    requestAnimFrame(this.animate.bind(this));
+    requestAnimationFrame(this.animate.bind(this));
+    this.clear();
     this.render();
   }
 }
