@@ -1,5 +1,6 @@
 import Vector2D = require('./Vector2D');
 import Object2D = require('./Object2D');
+import CanvasOptions = require('./CanvasOptions');
 
 class Canvas {
 
@@ -7,8 +8,10 @@ class Canvas {
   public context
   private children
 
-  constructor() {
+  constructor(options: CanvasOptions) {
     this.element = document.createElement('canvas');
+    this.element.width = options.width;
+    this.element.height = options.height;
     this.context = this.element.getContext('2d');
     this.children = [];
     this.setupEvents();
