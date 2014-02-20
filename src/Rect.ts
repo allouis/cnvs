@@ -1,4 +1,5 @@
 import Shape = require('./Shape');
+import Vector2D = require('./Vector2D');
 import RectOptions = require('./RectOptions');
 
 class Rect extends Shape {
@@ -10,6 +11,13 @@ class Rect extends Shape {
     super(options) 
       this.width = options.width
       this.height = options.height
+  }
+
+  containsPoint (point: Vector2D) {
+    return point.x > this.position.x                &&
+           point.x < this.position.x + this.width   &&
+           point.y > this.position.y                &&
+           point.y < this.position.y + this.height
   }
 
   render (ctx: any) {
