@@ -19,6 +19,7 @@ class Shape implements Object2D {
   }
 
   public render (ctx: any) {
+    ctx.beginPath();
     ctx.fillStyle = this.fill;
     ctx.strokeStyle = this.stroke;
     ctx.lineWidth = this.border;
